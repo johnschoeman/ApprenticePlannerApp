@@ -22,7 +22,7 @@ gem "sprockets", ">= 3.0.0"
 gem "suspenders"
 gem "title"
 gem "uglifier"
-
+gem "clearance"
 
 group :development do
   gem "listen"
