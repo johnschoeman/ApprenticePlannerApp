@@ -1,0 +1,11 @@
+<h1>Entries Show Page</h1>
+
+<h2>Date:</h2>
+<div class="goal-date"><%= @entry.date %></div>
+
+<h2>Goals:</h2>
+<ul class="goal-list">
+<% @entry.goals.each do |goal| %>
+  <li class="goal-summary"><%= goal.description %></li>
+<% end %>
+</ul>
