@@ -1,14 +1,17 @@
 class Entry < ApplicationRecord
-  validates :user, uniqueness: { scope: :date }
-  validates :date, presence: true
+  validates :date,
+    uniqueness: { scope: :user, message: ": Already an entry for this date" }
+   validates :date, presence: true
 
   has_many :goals, dependent: :destroy
   belongs_to :user
 
-  def self.build_entry(params)
+  def self.create_entry(params)
     ActiveRecord::Base.transaction do
-      entry = create({ date: params[:date], user: params[:user] })
-      entry.add_goals(params[:goals])
+      entry = new({ date: params[:date], user: params[:user] })
+      if entry.save
+        entry.add_goals(params[:goals])
+      end
       entry
     end
   end

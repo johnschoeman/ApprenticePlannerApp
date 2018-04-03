@@ -1,7 +1,7 @@
 <h1>create a new entry</h1>
 
 <%= form_for @entry, url: {action: "create"} do |f| %>
-  <input type="date" id="goal-date" name="entry[date]"/>
+  <input type="date" id="goal-date" name="entry[date]" value="<%= @entry.date %>"/>
   <% 3.times do |i| %>
     <% goal_id = "goal-#{i + 1}" %>
     <label for="<%= goal_id %>"><%= "Goal #{i + 1}" %></label>

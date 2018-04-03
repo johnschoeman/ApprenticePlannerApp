@@ -3,7 +3,7 @@ module Features
     def reset_password_for(email)
       visit new_password_path
       fill_in "password_email", with: email
-      click_button "Reset password" 
+      click_button "Reset password"
     end
 
     def sign_in
