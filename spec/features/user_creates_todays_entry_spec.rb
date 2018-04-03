@@ -18,21 +18,31 @@ RSpec.feature "User creates a journal entry" do
     expect(page).to have_content(todays_date)
   end
 
-  scenario "renders error message when validation fails" do
+  scenario "renders error message when entry is invalid" do
     todays_date = Date.today
 
     sign_in
     create_entry(date: todays_date)
     create_entry(date: todays_date)
 
-    error_message = "Date already has an entry"
+    error_message = "Entry Date already has an entry"
+    expect(page).to have_error_message(error_message)
+  end
+
+  scenario "renders error message when goal is invalid" do
+    goal_which_is_too_long = "i"*256
+
+    sign_in
+    create_entry(goal1: goal_which_is_too_long)
+
+    error_message = "Goal Description is too long (maximum is 255 characters)"
     expect(page).to have_error_message(error_message)
   end
 end
 
 def create_entry(date: Date.today, goal1: nil, goal2: nil, goal3: nil)
   visit new_entry_path
-  fill_in "goal-date", with: date
+  fill_in "entry-date", with: date
   fill_in "Goal 1", with: goal1 || Faker::Lorem.sentence
   fill_in "Goal 2", with: goal2 || Faker::Lorem.sentence
   fill_in "Goal 3", with: goal3 || Faker::Lorem.sentence

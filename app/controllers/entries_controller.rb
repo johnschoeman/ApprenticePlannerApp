@@ -1,15 +1,15 @@
 class EntriesController < ApplicationController
   def new
-    @entry = Entry.new
+    @entry_form = EntryForm.new
   end
 
   def create
-    @entry = Entry.create_entry(entry_params)
+    @entry_form = EntryForm.new(entry_form_params)
 
-    if @entry.valid?
-      redirect_to entry_path(@entry)
+    if @entry_form.save
+      redirect_to entry_path(@entry_form.entry)
     else
-      flash.now[:error] = @entry.errors.full_messages
+      flash.now[:error] = @entry_form.errors.full_messages
       render :new
     end
   end
@@ -20,10 +20,12 @@ class EntriesController < ApplicationController
 
   private
 
-  def entry_params
+  def entry_form_params
     params.
-      require(:entry).
-      permit(:date, goals: []).
-      merge(user: current_user)
+      require(:entry_form).
+      permit(:date, goal_descriptions: []).
+      merge(user: current_user).
+      to_h.
+      symbolize_keys
   end
 end

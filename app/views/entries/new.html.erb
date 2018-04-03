@@ -1,11 +1,21 @@
 <h1>create a new entry</h1>
 
-<%= form_for @entry, url: {action: "create"} do |f| %>
-  <input type="date" id="goal-date" name="entry[date]" value="<%= @entry.date %>"/>
-  <% 3.times do |i| %>
-    <% goal_id = "goal-#{i + 1}" %>
-    <label for="<%= goal_id %>"><%= "Goal #{i + 1}" %></label>
-    <input type="text" name="entry[goals][]" id="<%= goal_id %>"/>
+<%= form_for @entry_form, url: {action: "create"} do |f| %>
+  <input
+    type="date"
+    id="entry-date"
+    name="entry_form[date]"
+    value="<%= @entry_form.date %>"
+   />
+  <% @entry_form.goals.each_with_index do |goal, idx| %>
+    <% goal_id = "goal-#{idx + 1}" %>
+    <label for="<%= goal_id %>"><%= "Goal #{idx + 1}" %></label>
+    <input
+      type="text"
+      name="entry_form[goal_descriptions][]"
+      id="<%= goal_id %>"
+      value="<%= goal.description %>"
+    />
   <% end %>
   <%= f.submit %>
 <% end %>
