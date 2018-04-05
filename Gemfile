@@ -58,6 +58,7 @@ gem 'neat', '~> 2.1'
 gem 'refills', group: [:development, :test]
 gem 'spring-commands-rspec', group: :development
 gem 'rspec-rails', '~> 3.6', group: [:development, :test]
+gem 'rspec_junit_formatter', group: [:development, :test]
 gem 'shoulda-matchers', group: :test
 gem 'capybara-webkit', group: :test
 gem 'simple_form'

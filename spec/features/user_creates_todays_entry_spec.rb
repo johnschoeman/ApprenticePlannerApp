@@ -25,7 +25,7 @@ RSpec.feature "User creates a journal entry" do
     create_entry(date: todays_date)
     create_entry(date: todays_date)
 
-    error_message = "Date : Already an entry for this date"
+    error_message = "Date already has an entry"
     expect(page).to have_error_message(error_message)
   end
 end
