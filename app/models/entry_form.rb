@@ -1,99 +1,90 @@
 class EntryForm
   include ActiveModel::Model
-  extend ActiveModel::Naming
 
-  def initialize(entry: nil, goals: nil, date: nil, user: nil, goal_descriptions: Array.new(3) {""})
-    if entry
-      @date = date || entry.date
-    else
-      @date = date
-    end
-    @user = user
-    @goal_descriptions = goal_descriptions
-    @entry = entry || Entry.new(date: date, user: user)
-    @goals =
-      goals || @goal_descriptions.map { |description| Goal.new(description: description) }
-  end
+  attr_accessor :date, :user, :goal_descriptions
 
-  attr_reader :entry, :date
+  delegate :id, :persisted?, to: :entry
 
-  def goals
-    @goals.sort_by { |goal| goal.id }
+  validate :validate_children
+
+  def self.model_name
+    Entry.model_name
   end
 
   def self.find_by_entry_id(entry_id)
-    entry = Entry.find(entry_id)
-    new(entry: entry, goals: entry.goals)
-  end
-
-  def persisted?
-    false
+    entry = Entry.includes(:goals).find(entry_id)
+    entry_form = new
+    entry_form.entry = entry
+    entry_form.date = entry.date
+    entry_form.goals = entry.goals
+    entry_form
   end
 
   def save
     if valid?
-      persist!
-      true
-    else
-      add_error_messages
-      false
+      ActiveRecord::Base.transaction do
+        entry.save!
+        goals.each do |goal|
+          goal.save!
+        end
+      end
     end
   end
 
-  def update_attributes(date: nil, goal_descriptions: [], user: nil)
-    entry.date = date
-    if valid?
-      ActiveRecord::Base.transaction do
-        entry.save!
-        entry.goals.each do |goal|
-          goal.destroy!
-        end
-        @goals = goal_descriptions.map do |description|
-          Goal.create(description: description, entry: entry)
-        end
-      end
-      true
+  def update_attributes(params)
+    set_attributes(params)
+    save
+  end
+
+  def entry
+    @entry ||= Entry.new(date: date, user: user)
+  end
+
+  def goals
+    if @goals
+      @goals
     else
-      add_error_messages
-      false
+      if goal_descriptions
+        goal_descriptions.map { |desc| Entry.build_goal(description: desc, entry: entry) }
+      else
+        Array.new(3) { Goal.new }
+      end
     end
+  end
+
+  def entry=(entry)
+    @entry = entry
+  end
+
+  def goals=(goals)
+    @goals = goals
   end
 
   private
 
-  def valid?
-    entry_validation = entry.valid?
-    goals_validations = goals.all?(&:valid?)
-    entry_validation && goals_validations
-  end
-
-  def persist!
-    ActiveRecord::Base.transaction do
-      entry.save!
-      create_goals_for_entry!
+  def set_attributes(date: nil, user: nil, goal_descriptions: [])
+    entry.date = date
+    entry.user = user
+    goals.zip(goal_descriptions).each do |(goal, description)|
+      goal.description = description
     end
   end
 
-  def create_goals_for_entry!
-    goals.each { |goal| goal.update!(entry: entry) }
-  end
-
-  def add_error_messages
-    add_entry_error_messages
-    add_goal_error_messages
-  end
-
-  def add_entry_error_messages
-    entry.errors.full_messages.each do |message|
-      errors.add(:entry, message)
+  def validate_children
+    if entry.invalid?
+      promote_errors(entry.errors)
     end
-  end
 
-  def add_goal_error_messages
     goals.each do |goal|
-      goal.errors.full_messages.each do |message|
-        errors.add(:goal, message)
+      if goal.invalid?
+        promote_errors(goal.errors)
       end
+    end
+  end
+
+  def promote_errors(child_errors)
+    child_errors.each do |attribute, message|
+      errors.add(attribute, message)
     end
   end
 end

@@ -6,7 +6,11 @@ class Entry < ApplicationRecord
   has_many :goals, -> { order(id: :asc) }, dependent: :destroy
   belongs_to :user
 
-  def goals_count
-    goals.count
+  def self.build_goal(description: nil, entry: nil)
+    Goal.new(description: description, entry: entry)
+  end
+
+  def goal_descriptions
+    goals.map { |goal| goal.description }
   end
 end

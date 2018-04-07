@@ -25,7 +25,7 @@ RSpec.feature "User creates a journal entry" do
     create_entry(date: todays_date)
     create_entry(date: todays_date)
 
-    error_message = "Entry Date already has an entry"
+    error_message = "Date already has an entry"
     expect(page).to have_error_message(error_message)
   end
 
@@ -35,7 +35,7 @@ RSpec.feature "User creates a journal entry" do
     sign_in
     create_entry(goal1: goal_which_is_too_long)
 
-    error_message = "Goal Description is too long (maximum is 255 characters)"
+    error_message = "Description is too long (maximum is 255 characters)"
     expect(page).to have_error_message(error_message)
   end
 end
