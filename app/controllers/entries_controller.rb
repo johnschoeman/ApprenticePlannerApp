@@ -18,6 +18,25 @@ class EntriesController < ApplicationController
     @entry = Entry.find(params[:id])
   end
 
+  def index
+    @entries = Entry.all
+  end
+
+  def edit
+    @entry_form = EntryForm.find_by_entry_id(params[:id])
+  end
+
+  def update
+    @entry_form = EntryForm.find_by_entry_id(params[:id])
+
+    if @entry_form.update_attributes(entry_form_params)
+      redirect_to entry_path(@entry_form.entry)
+    else
+      flash.now[:error] = @entry_form.errors.full_messages
+      render :edit
+    end
+  end
+
   private
 
   def entry_form_params

@@ -3,6 +3,10 @@ class Entry < ApplicationRecord
     uniqueness: { scope: :user_id, message: "already has an entry" }
    validates :date, presence: true
 
-  has_many :goals, dependent: :destroy
+  has_many :goals, -> { order(id: :asc) }, dependent: :destroy
   belongs_to :user
+
+  def goals_count
+    goals.count
+  end
 end

@@ -1,4 +1,4 @@
-<h1>Entries Show Page</h1>
+<h1>Entry Show Page</h1>
 
 <h2>Date:</h2>
 <div class="goal-date"><%= @entry.date %></div>
@@ -9,3 +9,5 @@
   <li class="goal-summary"><%= goal.description %></li>
 <% end %>
 </ul>
+
+<a href=<%= edit_entry_path(@entry)%>>Edit Entry</a>

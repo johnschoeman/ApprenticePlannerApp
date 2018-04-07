@@ -1,0 +1,14 @@
+<h1>Entries Index</h1>
+
+<ul class="entries-list" />
+  <% @entries.each do |entry| %>
+    <li>
+      <a
+        href=<%= entry_path(entry) %>
+        id=<%= "entry-id-#{entry.id}" %>
+      >
+        <%= entry.date %>
+      </a>
+    </li>
+  <% end %>
+</ul>
