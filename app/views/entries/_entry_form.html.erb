@@ -1,0 +1,20 @@
+
+<%= form_for @entry_form do |f| %>
+  <input
+    type="date"
+    id="entry-date"
+    name="entry_form[date]"
+    value="<%= @entry_form.date %>"
+   />
+  <% @entry_form.goals.each_with_index do |goal, idx| %>
+    <% goal_id = "goal-#{idx + 1}" %>
+    <label for="<%= goal_id %>"><%= "Goal #{idx + 1}" %></label>
+    <input
+      type="text"
+      name="entry_form[goal_descriptions][]"
+      id="<%= goal_id %>"
+      value="<%= goal.description %>"
+    />
+  <% end %>
+  <%= submit_tag "#{@entry_form.new_record? ? 'Create' : 'Submit Edit'} Entry"  %>
+<% end %>

@@ -8,12 +8,17 @@ class EntryForm
   validate :validate_children
 
   def initialize(entry: nil)
+    @new_record = true unless entry
     @entry = entry || Entry.new(date: Date.today)
     if entry && !entry.goals.empty?
       @goals = entry.goals
     else
       @goals = Array.new(3) { Goal.new }
     end
+  end
+
+  def new_record?
+    @new_record
   end
 
   def self.model_name
