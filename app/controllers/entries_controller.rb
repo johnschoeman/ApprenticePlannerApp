@@ -4,9 +4,9 @@ class EntriesController < ApplicationController
   end
 
   def create
-    @entry_form = EntryForm.new(entry_form_params)
+    @entry_form = EntryForm.new
 
-    if @entry_form.save
+    if @entry_form.update_attributes(entry_form_params)
       redirect_to entry_path(@entry_form.entry)
     else
       flash.now[:error] = @entry_form.errors.full_messages
@@ -23,11 +23,13 @@ class EntriesController < ApplicationController
   end
 
   def edit
-    @entry_form = EntryForm.find_by_entry_id(params[:id])
+    entry = Entry.includes(:goals).find(params[:id])
+    @entry_form = EntryForm.new(entry: entry)
   end
 
   def update
-    @entry_form = EntryForm.find_by_entry_id(params[:id])
+    entry = Entry.includes(:goals).find(params[:id])
+    @entry_form = EntryForm.new(entry: entry)
 
     if @entry_form.update_attributes(entry_form_params)
       redirect_to entry_path(@entry_form.entry)
