@@ -10,4 +10,8 @@
 <% end %>
 </ul>
 
-<a href="<%= edit_entry_path(@entry)%>">Edit Entry</a>
+<% if @entry.user == current_user %>
+  <a href="<%= edit_entry_path(@entry)%>">Edit Entry</a>
+  <%= button_to("Delete Entry", { action: "destroy", id: @entry.id },
+      method: "delete", data: { confirm: "Are you sure?", disable_with: "loading..."}) %>
+<% end %>

@@ -7,6 +7,7 @@ class EntriesController < ApplicationController
     @entry_form = EntryForm.new
 
     if @entry_form.update_attributes(entry_form_params)
+      flash[:success] = "Entry has been created"
       redirect_to entry_path(@entry_form.entry)
     else
       flash.now[:error] = @entry_form.errors.full_messages
@@ -32,10 +33,23 @@ class EntriesController < ApplicationController
     @entry_form = EntryForm.new(entry: entry)
 
     if @entry_form.update_attributes(entry_form_params)
+      flash[:success] = "Entry has been updated"
       redirect_to entry_path(@entry_form.entry)
     else
       flash.now[:error] = @entry_form.errors.full_messages
       render :edit
+    end
+  end
+
+  def destroy
+    entry = current_user.entries.find_by(id: params[:id])
+    if entry.present?
+      entry.destroy
+      flash[:success] = "Entry has been deleted"
+      redirect_to entries_path
+    else
+      flash[:error] = "You are not authorized to delete this entry"
+      redirect_to entries_path
     end
   end
 

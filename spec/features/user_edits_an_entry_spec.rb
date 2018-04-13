@@ -11,11 +11,11 @@ RSpec.feature "User edits and entry" do
     final_goal2 = Faker::Lorem.sentence
     todays_date = Date.today
 
-    user = sign_in
+    user = create(:user)
     entry_to_edit =
       Entry.create(date: todays_date, goals: initial_goals, user: user)
 
-    visit entries_path
+    visit entries_path(as: user)
     click_on "entry-id-#{entry_to_edit.id}"
     expect(page).to have_content("Entry Show Page")
     expect(page).to have_content(entry_to_edit.date)
@@ -36,22 +36,22 @@ RSpec.feature "User edits and entry" do
   scenario "trys to edit an entry with invalid form data" do
     todays_date = Date.today
     tomorrows_date = todays_date.next_day
-    user = sign_in
+    user = create(:user)
     entry_to_edit = Entry.create(date: tomorrows_date, user: user)
     Entry.create(date: todays_date, user: user)
 
-    visit edit_entry_path(entry_to_edit)
+    visit edit_entry_path(entry_to_edit, as: user)
     fill_in "entry-date", with: todays_date
     click_on "Submit Edit Entry"
 
     expect(page).to have_error_message("Date already has an entry")
   end
-end
 
-def have_goal_summary(goal)
-  have_css(".goal-summary", text: goal)
-end
+  def have_goal_summary(goal)
+    have_css(".goal-summary", text: goal)
+  end
 
-def have_error_message(message)
-  have_css(".flash-error", text: message)
+  def have_error_message(message)
+    have_css(".flash-error", text: message)
+  end
 end

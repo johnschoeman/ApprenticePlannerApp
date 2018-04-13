@@ -38,21 +38,21 @@ RSpec.feature "User creates a journal entry" do
     error_message = "Description is too long (maximum is 255 characters)"
     expect(page).to have_error_message(error_message)
   end
-end
 
-def create_entry(date: Date.today, goal1: nil, goal2: nil, goal3: nil)
-  visit new_entry_path
-  fill_in "entry-date", with: date
-  fill_in "Goal 1", with: goal1 || Faker::Lorem.sentence
-  fill_in "Goal 2", with: goal2 || Faker::Lorem.sentence
-  fill_in "Goal 3", with: goal3 || Faker::Lorem.sentence
-  click_on "Create Entry"
-end
+  def create_entry(date: Date.today, goal1: nil, goal2: nil, goal3: nil)
+    visit new_entry_path
+    fill_in "entry-date", with: date
+    fill_in "Goal 1", with: goal1 || Faker::Lorem.sentence
+    fill_in "Goal 2", with: goal2 || Faker::Lorem.sentence
+    fill_in "Goal 3", with: goal3 || Faker::Lorem.sentence
+    click_on "Create Entry"
+  end
 
-def have_goal_summary(goal)
-  have_css(".goal-summary", text: goal)
-end
+  def have_goal_summary(goal)
+    have_css(".goal-summary", text: goal)
+  end
 
-def have_error_message(message)
-  have_css(".flash-error", text: message)
+  def have_error_message(message)
+    have_css(".flash-error", text: message)
+  end
 end
