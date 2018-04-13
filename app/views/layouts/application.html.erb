@@ -9,17 +9,8 @@
   <%= csrf_meta_tags %>
 </head>
 <body class="<%= body_class %>">
-  <% if signed_in? %>
-    <%= current_user.email %>
-  <form action="<%= sign_out_path %>" method="post">
-    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-    <input type="hidden" name="_method" value="delete" />
-    <input type="submit" value="Sign out"/>
-  </form>
-  <% else %>
-    <%= link_to "Sign in", sign_in_path %>
-  <% end %>
-  <%= render "flashes" -%>
+  <%= render "navbar" %>
+  <%= render "flashes" %>
   <%= yield %>
   <%= render "javascript" %>
   <%= render "css_overrides" %>

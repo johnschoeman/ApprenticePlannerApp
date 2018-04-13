@@ -1,0 +1,9 @@
+<% if signed_in? %>
+  <%= current_user.email %>
+  <%= link_to "Sign Out", sign_out_path, method: :delete %>
+  <%= link_to "Entries Index", entries_path %>
+  <%= link_to "New Entry", new_entry_path %>
+<% else %>
+  <%= link_to "Sign In", sign_in_path %>
+<% end %>
+

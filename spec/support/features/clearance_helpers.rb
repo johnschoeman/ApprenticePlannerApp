@@ -21,23 +21,23 @@ module Features
     end
 
     def sign_out
-      click_button "Sign out" 
+      click_on "Sign Out" 
     end
 
     def sign_up_with(email, password)
       visit sign_up_path
       fill_in "user_email", with: email
       fill_in "user_password", with: password
-      click_button "Sign up" 
+      click_on "Sign up" 
     end
 
     def expect_user_to_be_signed_in
       visit root_path
-      expect(page).to have_button "Sign out" 
+      expect(page).to have_content "Sign Out" 
     end
 
     def expect_user_to_be_signed_out
-      expect(page).to have_content "Sign in"
+      expect(page).to have_content "Sign In"
     end
 
     def user_with_reset_password
