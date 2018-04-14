@@ -27,6 +27,7 @@ RSpec.describe "entries/show.html.erb" do
   def render_entry(entry, current_user: nil)
     assign(:entry, entry)
     assign(:current_user, current_user)
+    assign(:note, Note.new(entry: entry, content: ""))
 
     render
   end

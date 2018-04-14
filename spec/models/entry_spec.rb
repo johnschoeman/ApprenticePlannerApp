@@ -11,5 +11,6 @@ RSpec.describe Entry, type: :model do
     it { should validate_presence_of(:user).with_message("must exist") }
     it { should validate_presence_of(:date) }
     it { should have_many(:goals) }
+    it { should have_one(:note) }
   end
 end
