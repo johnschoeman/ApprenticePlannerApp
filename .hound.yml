@@ -1,9 +1,9 @@
 ruby:
   enabled: true
-  config_file: style/.rubocop.yml
+  config_file: .rubocop.yml
 scss:
   enabled: true
-  config_file: style/.scss-lint.yml
+  config_file: .scss-lint.yml
 javascript:
   enabled: true
-  config_file: style/.eslintrc.json
+  config_file: .eslintrc.json

@@ -10,11 +10,11 @@ class EntryForm
   def initialize(entry: nil)
     @new_record = true unless entry
     @entry = entry || Entry.new(date: Date.today)
-    if entry && !entry.goals.empty?
-      @goals = entry.goals
-    else
-      @goals = Array.new(3) { Goal.new }
-    end
+    @goals = if entry_exists_and_has_no_goals?(entry)
+               entry.goals
+             else
+               Array.new(3) { Goal.new }
+             end
   end
 
   def new_record?
@@ -31,6 +31,10 @@ class EntryForm
   end
 
   private
+
+  def entry_exists_and_has_no_goals?(entry)
+    entry && !entry.goals.empty?
+  end
 
   def set_attributes(date: nil, user: nil, goal_descriptions: [])
     entry.date = date

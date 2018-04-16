@@ -47,11 +47,10 @@ class EntriesController < ApplicationController
     if entry.present?
       entry.destroy
       flash[:success] = "Entry has been deleted"
-      redirect_to entries_path
     else
       flash[:error] = "You are not authorized to delete this entry"
-      redirect_to entries_path
     end
+    redirect_to entries_path
   end
 
   private

@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "EntryForm" do
   it "initializes with a blank entry and three blank goals" do

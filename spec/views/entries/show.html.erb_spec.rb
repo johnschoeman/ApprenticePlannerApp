@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "entries/show.html.erb" do
   context "the current user is the owner of the entry" do

@@ -1,5 +1,5 @@
-require 'rails_helper'
-require 'support/features/clearance_helpers'
+require "rails_helper"
+require "support/features/clearance_helpers"
 
 RSpec.feature "User creates a journal entry" do
   scenario "creates today's entry" do
@@ -7,7 +7,8 @@ RSpec.feature "User creates a journal entry" do
     goal2 = Faker::Lorem.sentence
     goal3 = Faker::Lorem.sentence
     todays_date = Date.today
-    entry_params = { date: todays_date, goal1: goal1, goal2: goal2, goal3: goal3 }
+    entry_params =
+      { date: todays_date, goal1: goal1, goal2: goal2, goal3: goal3 }
 
     sign_in
     visit_new_entry_form_via_nav_bar
@@ -33,7 +34,7 @@ RSpec.feature "User creates a journal entry" do
   end
 
   scenario "renders error message when goal is invalid" do
-    goal_which_is_too_long = "i"*256
+    goal_which_is_too_long = "i" * 256
 
     sign_in
     visit new_entry_path

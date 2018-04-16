@@ -2,6 +2,9 @@ AllCops:
   Exclude:
     - db/schema.rb
     - db/migrate/*.rb
+    - config/initializers/*.rb
+    - config/environments/*.rb
+    - bin/*
 
 Naming/AccessorMethodName:
   Description: Check the naming of accessor methods for get_/set_.

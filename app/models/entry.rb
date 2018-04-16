@@ -8,6 +8,6 @@ class Entry < ApplicationRecord
   belongs_to :user
 
   def goal_descriptions
-    goals.map { |goal| goal.description }
+    goals.map(&:description)
   end
 end

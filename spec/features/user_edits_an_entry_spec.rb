@@ -1,5 +1,5 @@
-require 'rails_helper'
-require 'support/features/clearance_helpers'
+require "rails_helper"
+require "support/features/clearance_helpers"
 
 RSpec.feature "User edits an entry" do
   scenario "edits an entry" do

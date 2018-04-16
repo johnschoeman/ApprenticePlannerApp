@@ -5,7 +5,7 @@ RSpec.feature "Visitor signs up" do
   scenario "by navigating to the page" do
     visit sign_in_path
 
-    click_link "Sign up" 
+    click_link "Sign up"
 
     expect(current_path).to eq sign_up_path
   end
