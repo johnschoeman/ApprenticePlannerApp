@@ -11,7 +11,9 @@
 <body class="<%= body_class %>">
   <%= render "navbar" %>
   <%= render "flashes" %>
-  <%= yield %>
+  <div class="page-content-container" >
+    <%= yield %>
+  </div>
   <%= render "javascript" %>
   <%= render "css_overrides" %>
 </body>

@@ -1,0 +1,28 @@
+.entry-section {
+  border-bottom: $base-border;
+  display: flex;
+  margin-top: $base-margin;
+  padding-bottom: $small-padding;
+  padding-left: $small-padding;
+
+  &:last-of-type {
+    border-bottom: 0;
+  }
+
+  h2 {
+    margin-bottom: 0;
+    margin-right: $small-margin;
+  }
+}
+
+.note-content {
+  min-height: 300px;
+  width: 485px;
+}
+
+.mutation-buttons-container {
+  align-items: center;
+  display: flex;
+  margin-left: auto;
+  min-width: 280px;
+}

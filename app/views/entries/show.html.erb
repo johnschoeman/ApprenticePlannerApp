@@ -1,19 +1,30 @@
-<h1>Entry Show Page</h1>
+<h1 class="page-title">Entry Show Page</h1>
 
-<h2>Date:</h2>
-<div class="goal-date"><%= @entry.date %></div>
+<div class="entry-section">
+  <h2>Date:</h2>
+  <div class="goal-date"><%= @entry.date %></div>
+</div>
 
-<h2>Goals:</h2>
-<ul class="goal-list">
-<% @entry.goals.each do |goal| %>
-  <li class="goal-summary"><%= goal.description %></li>
-<% end %>
-</ul>
+<div class="entry-section">
+  <h2>Goals:</h2>
+  <ul class="goal-list">
+  <% @entry.goals.each do |goal| %>
+    <li class="goal-summary"><%= goal.description %></li>
+  <% end %>
+  </ul>
+</div>
 
-<%= render "note_form", note: @note, entry: @entry %>
+<div class="entry-section">
+  <h2>Notes:</h2>
+  <%= render "note_form", note: @note, entry: @entry %>
+</div>
 
 <% if @entry.user == current_user %>
-  <a href="<%= edit_entry_path(@entry)%>">Edit Entry</a>
-  <%= button_to("Delete Entry", { action: "destroy", id: @entry.id },
-      method: "delete", data: { confirm: "Are you sure?", disable_with: "loading..."}) %>
+  <div class="entry-section">
+    <div class="mutation-buttons-container">
+      <a class="button" href="<%= edit_entry_path(@entry)%>">Edit Entry</a>
+      <%= button_to("Delete Entry", { action: "destroy", id: @entry.id },
+          method: "delete", data: { confirm: "Are you sure?", disable_with: "loading..."}) %>
+    </div>
+  </div>
 <% end %>

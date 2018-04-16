@@ -12,7 +12,7 @@ RSpec.feature "Entry Notes" do
     visit entry_path(entry, as: user)
     expect(page).to have_content(original_note_content)
 
-    fill_in "Notes", with: new_note_content
+    fill_in "note_content", with: new_note_content
     click_on "Save Notes"
 
     expect(page).to have_content("Note Saved")
@@ -26,7 +26,7 @@ RSpec.feature "Entry Notes" do
     notes_text = Faker::Lorem.paragraph
 
     visit entry_path(entry, as: user)
-    fill_in "Notes", with: notes_text
+    fill_in "note_content", with: notes_text
     click_on "Save Notes"
 
     expect(page).to have_content(notes_text)

@@ -13,21 +13,22 @@ $small-spacing: $base-spacing / 2;
 $base-z-index: 0;
 
 // Colors
-$blue: #1565c0;
-$dark-gray: #333;
+$blue: #2565c0;
+$red: #da292f;
+$dark-gray: #444;
 $medium-gray: #999;
 $light-gray: #ddd;
 
 // Font Colors
 $base-font-color: $dark-gray;
-$action-color: $blue;
+$action-color: $red;
 
 // Border
 $base-border-color: $light-gray;
 $base-border: 1px solid $base-border-color;
 
 // Background Colors
-$viewport-background-color: #fff;
+$viewport-background-color: #fdfdfd;
 
 // Focus
 $focus-outline-color: transparentize($action-color, 0.4);
@@ -38,3 +39,11 @@ $focus-outline-offset: 2px;
 // Animations
 $base-duration: 150ms;
 $base-timing: ease;
+
+// Margins and Paddings
+$base-margin: 24px;
+$small-margin: $base-margin / 2;
+$large-margin: $base-margin * 2;
+$base-padding: 24px;
+$small-padding: $base-padding / 2;
+$large-padding: $base-padding * 2;

@@ -1,0 +1,17 @@
+.navbar {
+  align-items: center;
+  border-bottom: 1px solid $medium-gray;
+  display: flex;
+  height: 80px;
+  justify-content: space-between;
+
+  .entry-nav {
+    margin-left: $base-margin;
+  }
+
+  .user-nav {
+    display: flex;
+    flex-direction: column;
+    margin-right: $base-margin;
+  }
+}

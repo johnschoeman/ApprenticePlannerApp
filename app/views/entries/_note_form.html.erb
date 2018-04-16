@@ -5,7 +5,6 @@
 <% end %>
 
 <%= form_for note, url: action_url do |note_form| %>
-  <%= label :note, :content, "Notes: " %>
   <%= note_form.text_area :content, class: "note-content" %>
   <%= note_form.submit "Save Notes" %>
 <% end %>
