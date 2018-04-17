@@ -26,3 +26,14 @@
   margin-left: auto;
   min-width: 280px;
 }
+
+.goal-checkbox-label {
+  align-items: center;
+  display: flex;
+}
+
+.goal-checkbox-input:checked {
+  ~ .goal-checkbox-content {
+    text-decoration: line-through;
+  }
+}

@@ -9,7 +9,14 @@
   <h2>Goals:</h2>
   <ul class="goal-list">
   <% @entry.goals.each do |goal| %>
-    <li class="goal-summary"><%= goal.description %></li>
+    <% goal_id = "goal-#{goal.id}" %>
+    <li class="goal-summary" >
+      <label class="goal-checkbox-label">
+        <%= check_box_tag goal_id, true, goal.completed,
+          class: "goal-checkbox-input", data: { goal_id: goal.id }  %>
+        <div class="goal-checkbox-content"><%= goal.description %></div>
+      </label>
+   </li>
   <% end %>
   </ul>
 </div>
@@ -24,7 +31,9 @@
     <div class="mutation-buttons-container">
       <a class="button" href="<%= edit_entry_path(@entry)%>">Edit Entry</a>
       <%= button_to("Delete Entry", { action: "destroy", id: @entry.id },
-          method: "delete", data: { confirm: "Are you sure?", disable_with: "loading..."}) %>
+                    method: "delete", 
+                    data: { confirm: "Are you sure?", 
+                            disable_with: "loading..."}) %>
     </div>
   </div>
 <% end %>
