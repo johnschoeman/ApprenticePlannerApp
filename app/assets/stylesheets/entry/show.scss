@@ -26,3 +26,14 @@
   margin-left: auto;
   min-width: 280px;
 }
+
+.toggle-label {
+  display: flex;
+  align-items: center;
+}
+
+.toggle-input:checked {
+  ~ .toggle-content {
+    text-decoration: line-through;
+  }
+}

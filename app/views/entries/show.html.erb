@@ -10,7 +10,18 @@
   <ul class="goal-list">
   <% @entry.goals.each do |goal| %>
     <% goal_id = "goal-#{goal.id}" %>
-    <li id="<%= goal_id %>" class="goal-summary"><%= goal.description %></li>
+    <% checkbox_state = goal.completed == true ? "checked" : "" %>
+    <li class="goal-summary" >
+      <label class="toggle-label">
+        <input
+          type="checkbox"
+          id="<%= goal_id %>"
+          class="toggle-input"
+          <%= checkbox_state %>
+        />
+        <div class="toggle-content"><%= goal.description %></div>
+      </label>
+   </li>
   <% end %>
   </ul>
 </div>
@@ -29,3 +40,18 @@
     </div>
   </div>
 <% end %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+
+    console.log("<%= entries_url %>");
+    const goal_nodes = document.getElementsByClassName("goal-summary");
+    const goals = Array.prototype.slice.call(goal_nodes)
+
+    goals.forEach((goal) => {
+      goal.addEventListener("click", (event) => {
+      }, false);
+    });
+
+  });
+</script>
