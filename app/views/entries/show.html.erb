@@ -9,7 +9,8 @@
   <h2>Goals:</h2>
   <ul class="goal-list">
   <% @entry.goals.each do |goal| %>
-    <li class="goal-summary"><%= goal.description %></li>
+    <% goal_id = "goal-#{goal.id}" %>
+    <li id="<%= goal_id %>" class="goal-summary"><%= goal.description %></li>
   <% end %>
   </ul>
 </div>
