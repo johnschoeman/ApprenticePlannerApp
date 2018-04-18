@@ -31,3 +31,4 @@ WebMock.disable_net_connect!(allow_localhost: true)
 
 # Only allow Timecop with block syntax
 Timecop.safe_mode = true
+

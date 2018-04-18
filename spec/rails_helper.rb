@@ -18,8 +18,14 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
   config.use_transactional_fixtures = true
 
-  Capybara.javascript_driver = :webkit
 end
 
 ActiveRecord::Migration.maintain_test_schema!
+
+Capybara.javascript_driver = :webkit
+
+# Capybara::Webkit.configure do |config|
+#   config.debug = true
+#   config.raise_javascript_errors = true
+# end
 

@@ -2,6 +2,14 @@ FactoryBot.define do
   factory :goal do
     description { Faker::Lorem.sentence }
     entry
-    completed { [true, false].sample }
+    completed false
+
+    trait :completed do
+      completed true
+    end
+
+    trait :uncompleted do
+      completed false
+    end
   end
 end

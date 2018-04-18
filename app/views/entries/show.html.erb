@@ -15,8 +15,10 @@
       <label class="toggle-label">
         <input
           type="checkbox"
+          data-goal-id="<%= goal.id %>"
           id="<%= goal_id %>"
           class="toggle-input"
+          name="goal"
           <%= checkbox_state %>
         />
         <div class="toggle-content"><%= goal.description %></div>
@@ -44,14 +46,28 @@
 <script>
   document.addEventListener("DOMContentLoaded", () => {
 
-    console.log("<%= entries_url %>");
     const goal_nodes = document.getElementsByClassName("goal-summary");
     const goals = Array.prototype.slice.call(goal_nodes)
 
     goals.forEach((goal) => {
       goal.addEventListener("click", (event) => {
+        let goalId = event.target.dataset.goalId;
+        let baseUrl = "<%= api_goal_url  %>"
+        let re = /(\d)+$/g
+        let url = baseUrl.replace(re, goalId);
+        let csrfToken = document.getElementsByName("csrf-token")[0].content;
+
+        fetch(url, {
+          method: 'PUT',
+          headers: new Headers({
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRF-Token': "<%= form_authenticity_token %>"
+          }),
+          credentials: 'same-origin'
+        })
+
       }, false);
     });
 
-  });
+  })
 </script>
