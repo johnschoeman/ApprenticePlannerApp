@@ -16,6 +16,7 @@ RSpec.feature "User completes a goal" do
     # goal2_selector = "#goal-#{goal2.id}"
 
     visit entry_path(entry, as: user)
+    save_and_open_page
     find(:css, goal1_selector).set(true)
     save_and_open_page
 

@@ -25,7 +25,7 @@ ActiveRecord::Migration.maintain_test_schema!
 Capybara.javascript_driver = :webkit
 
 Capybara::Webkit.configure do |config|
-  config.debug = true
+  # config.debug = true
   config.raise_javascript_errors = true
 end
 

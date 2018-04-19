@@ -11,6 +11,8 @@ gem "rails", "~> 5.1.4"
 
 gem "autoprefixer-rails"
 gem "clearance"
+gem "es6-promise-rails"
+gem "fetch-rails"
 gem "flutie"
 gem "honeybadger"
 gem "jquery-rails"
