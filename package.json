@@ -3,5 +3,8 @@
   "private": true,
   "dependencies": {
     "normalize.css": "^8.0.0"
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.6.1"
   }
 }

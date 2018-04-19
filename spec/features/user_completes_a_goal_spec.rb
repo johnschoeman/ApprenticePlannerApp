@@ -15,11 +15,12 @@ RSpec.feature "User completes a goal" do
     goal1_selector = "input#goal-#{goal1.id}"
     # goal2_selector = "#goal-#{goal2.id}"
 
-    page.driver.enable_logging
     visit entry_path(entry, as: user)
     find(:css, goal1_selector).set(true)
+    save_and_open_page
 
     visit entry_path(entry)
+    save_and_open_page
     expect(page.find(goal1_selector)).to be_checked
 
   end

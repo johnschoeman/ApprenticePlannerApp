@@ -8,6 +8,7 @@ require "action_mailer/railtie"
 require "action_view/railtie"
 require "action_cable/engine"
 require "sprockets/railtie"
+require "sprockets/es6"
 Bundler.require(*Rails.groups)
 module ApprenticeJournalApp
   class Application < Rails::Application

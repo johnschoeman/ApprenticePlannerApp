@@ -28,6 +28,7 @@ RSpec.describe "entries/show.html.erb" do
     assign(:entry, entry)
     assign(:current_user, current_user)
     assign(:note, Note.new(entry: entry, content: ""))
+    assign(:api_goal_url, api_goal_url(id: 1))
 
     render
   end
