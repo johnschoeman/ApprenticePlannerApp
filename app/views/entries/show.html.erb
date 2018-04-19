@@ -12,16 +12,20 @@
     <% goal_id = "goal-#{goal.id}" %>
     <% checkbox_state = goal.completed == true ? "checked" : "" %>
     <li class="goal-summary" >
-      <label class="toggle-label">
+      <label class="goal-checkbox-label">
+<!--
+        <%= check_box_tag goal_id, true, checked = goal.completed, class: "goal-checkbox-input", data: { goal_id: goal.id }  %>
+-->
         <input
           type="checkbox"
           data-goal-id="<%= goal.id %>"
           id="<%= goal_id %>"
-          class="toggle-input"
+          class="goal-checkbox-input"
           name="goal"
           <%= checkbox_state %>
         />
-        <div class="toggle-content"><%= goal.description %></div>
+
+        <div class="goal-checkbox-content"><%= goal.description %></div>
       </label>
    </li>
   <% end %>
@@ -38,38 +42,9 @@
     <div class="mutation-buttons-container">
       <a class="button" href="<%= edit_entry_path(@entry)%>">Edit Entry</a>
       <%= button_to("Delete Entry", { action: "destroy", id: @entry.id },
-          method: "delete", data: { confirm: "Are you sure?", disable_with: "loading..."}) %>
+                    method: "delete", 
+                    data: { confirm: "Are you sure?", 
+                            disable_with: "loading..."}) %>
     </div>
   </div>
 <% end %>
-
-<% if protect_against_forgery? %>
-  <%= javascript_tag "var apiGoalUrl  = '#{api_goal_url}';" %>
-<% end %>
-
-<!--
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-
-    const goal_list = document.getElementById("goal-list");
-    goal_list.addEventListener("click", (event) => {
-      let goalId = event.target.dataset.goalId;
-      if (goalId) {
-        let baseUrl = "<#%= api_goal_url  %>"
-        let re = /(\d)+$/g
-        let url = baseUrl.replace(re, goalId);
-        let csrfToken = document.getElementsByName("csrf-token")[0].content;
-
-        fetch(url, {
-          method: 'PUT',
-          headers: new Headers({
-            'X-Requested-With': 'XMLHttpRequest',
-            'X-CSRF-Token': "<%= form_authenticity_token %>"
-          }),
-          credentials: 'same-origin'
-        })
-      }
-    }, false);
-  })
-</script>
--->

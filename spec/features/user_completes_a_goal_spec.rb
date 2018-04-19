@@ -6,24 +6,22 @@ RSpec.feature "User completes a goal" do
     user = create(:user)
     entry = create(:entry, user: user)
     goal1_description = Faker::Lorem.sentence
-    # goal1 =
-    #   create(:goal, :incomplete, entry: entry, description: goal1_description)
-    goal1 = Goal.create(entry: entry, description: goal1_description, completed: false)
+    goal1 = Goal.create(entry: entry,
+                        description: goal1_description,
+                        completed: false)
     goal2_description = Faker::Lorem.sentence
-    # goal2 =
-    #   create(:goal, :incomplete, entry: entry, description: goal2_description)
+    goal2 = Goal.create(entry: entry,
+                        description: goal2_description,
+                        completed: false)
     goal1_selector = "input#goal-#{goal1.id}"
-    # goal2_selector = "#goal-#{goal2.id}"
+    goal2_selector = "input#goal-#{goal2.id}"
 
     visit entry_path(entry, as: user)
-    save_and_open_page
     find(:css, goal1_selector).set(true)
-    save_and_open_page
 
     visit entry_path(entry)
-    save_and_open_page
     expect(page.find(goal1_selector)).to be_checked
-
+    expect(page.find(goal2_selector)).to_not be_checked
   end
 
   scenario "Goals that are completed show as checked" do

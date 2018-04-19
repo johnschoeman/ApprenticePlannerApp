@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let goalId = event.target.dataset.goalId;
     if (goalId) {
       let url = Routes.api_goal_url(goalId);
-      // let csrf = document.querySelector('meta[name=csrf-token')
+      // let csrf = document.querySelector('meta[name=csrf-token]')
       // let csrfToken = csrf.content
       let csrfToken = $('meta[name=csrf-token]').attr('content')
 
