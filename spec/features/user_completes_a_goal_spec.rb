@@ -6,13 +6,11 @@ RSpec.feature "User completes a goal" do
     user = create(:user)
     entry = create(:entry, user: user)
     goal1_description = Faker::Lorem.sentence
-    goal1 = Goal.create(entry: entry,
-                        description: goal1_description,
-                        completed: false)
+    goal1 = create(:goal, :uncompleted, entry: entry,
+                                        description: goal1_description)
     goal2_description = Faker::Lorem.sentence
-    goal2 = Goal.create(entry: entry,
-                        description: goal2_description,
-                        completed: false)
+    goal2 = create(:goal, :uncompleted, entry: entry,
+                                        description: goal2_description)
     goal1_selector = "input#goal-#{goal1.id}"
     goal2_selector = "input#goal-#{goal2.id}"
 

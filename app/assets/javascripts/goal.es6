@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (goalId) {
       let url = Routes.api_goal_url(goalId);
       let csrfToken = document.querySelector('meta[name=csrf-token]').content;
-
       fetch(url, {
         method: 'PUT',
         headers: new Headers({
@@ -13,16 +12,20 @@ document.addEventListener("DOMContentLoaded", () => {
           'X-CSRF-Token': csrfToken
         }),
         credentials: 'same-origin'
-      }).then(res => handleErrors(res))
-        .catch(err => console.log(err));
-
+      }).then(res => handleResult(res))
+        .catch(err => handleErrors(err));
     }
   }, false);
 })
 
-const handleErrors = (res) => {
-  if (!res.ok) {
-    const alertMessage = `Error saveing goal: status: ${res.status} ${res.statusText}`;
-    alert(alertMessage);
+const handleResult = (result) => {
+  if (!result.ok) {
+    resetGoal(); // TODO: reset the goal in the UI since the request failed.
+    throw Error(result.statusText);
   }
+};
+
+const handleErrors = (errors) => {
+  const alertMessage = `Error saving goal:  ${errors}`;
+  alert(alertMessage);
 };

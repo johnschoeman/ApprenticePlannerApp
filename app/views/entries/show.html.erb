@@ -12,7 +12,7 @@
     <% goal_id = "goal-#{goal.id}" %>
     <li class="goal-summary" >
       <label class="goal-checkbox-label">
-        <%= check_box_tag goal_id, true, checked = goal.completed,
+        <%= check_box_tag goal_id, true, goal.completed,
           class: "goal-checkbox-input", data: { goal_id: goal.id }  %>
         <div class="goal-checkbox-content"><%= goal.description %></div>
       </label>
