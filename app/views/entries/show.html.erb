@@ -7,24 +7,13 @@
 
 <div class="entry-section">
   <h2>Goals:</h2>
-  <ul class="goal-list" id="goal-list">
+  <ul class="goal-list">
   <% @entry.goals.each do |goal| %>
     <% goal_id = "goal-#{goal.id}" %>
-    <% checkbox_state = goal.completed == true ? "checked" : "" %>
     <li class="goal-summary" >
       <label class="goal-checkbox-label">
-<!--
-        <%= check_box_tag goal_id, true, checked = goal.completed, class: "goal-checkbox-input", data: { goal_id: goal.id }  %>
--->
-        <input
-          type="checkbox"
-          data-goal-id="<%= goal.id %>"
-          id="<%= goal_id %>"
-          class="goal-checkbox-input"
-          name="goal"
-          <%= checkbox_state %>
-        />
-
+        <%= check_box_tag goal_id, true, checked = goal.completed,
+          class: "goal-checkbox-input", data: { goal_id: goal.id }  %>
         <div class="goal-checkbox-content"><%= goal.description %></div>
       </label>
    </li>

@@ -13,7 +13,6 @@
 //= require fetch
 //= require promise
 //= require babel
-//= require jquery
 //= require js-routes
 //= require rails-ujs
 //= require_tree .
