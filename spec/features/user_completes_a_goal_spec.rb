@@ -16,8 +16,11 @@ RSpec.feature "User completes a goal" do
     goal1_selector = "input#goal-#{goal1.id}"
     goal2_selector = "input#goal-#{goal2.id}"
 
+    allow_protect_against_forgery
+
     visit entry_path(entry, as: user)
-    find(:css, goal1_selector).set(true)
+    click_checkbox(goal1_selector)
+    wait_for_ajax
 
     visit entry_path(entry)
     expect(page.find(goal1_selector)).to be_checked
@@ -34,5 +37,18 @@ RSpec.feature "User completes a goal" do
     visit entry_path(entry)
     expect(page.find(completed_checkbox_selector)).to be_checked
     expect(page.find(uncompleted_checkbox_selector)).to_not be_checked
+  end
+
+  def allow_protect_against_forgery
+    allow_any_instance_of(ActionController::Base).
+      to receive(:protect_against_forgery?).and_return(true)
+  end
+
+  def click_checkbox(checkbox_selector)
+    find(:css, checkbox_selector).set(true)
+  end
+
+  def wait_for_ajax
+    sleep 1 # TODO: actually wait for ajax and not just sleep 1
   end
 end
