@@ -11,5 +11,9 @@ FactoryBot.define do
     trait :uncompleted do
       completed false
     end
+
+    trait :blank do
+      description ""
+    end
   end
 end

@@ -17,6 +17,7 @@ class EntriesController < ApplicationController
 
   def show
     @entry = Entry.find(params[:id])
+    @goals = @entry.goals.with_descriptions
     @note = @entry.note || Note.new(entry: @entry, content: "")
   end
 
