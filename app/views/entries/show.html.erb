@@ -32,7 +32,7 @@
       <a class="button" href="<%= edit_entry_path(@entry)%>">Edit Entry</a>
       <%= button_to("Delete Entry", { action: "destroy", id: @entry.id },
                     method: "delete", 
-                    data: { confirm: "Are you sure?", 
+                    data: { confirm: "Are you sure?",
                             disable_with: "loading..."}) %>
     </div>
   </div>

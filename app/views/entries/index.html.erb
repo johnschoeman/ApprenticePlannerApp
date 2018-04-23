@@ -1,5 +1,13 @@
 <h1 class="page-title">Entries Index Page</h1>
 
+<h2>Tidbit of the Day</h2>
+<% if @tidbit %>
+  <div class="tidbit-link">
+    <%= link_to @tidbit.title, @tidbit.url %>
+  </div>
+<% end %>
+
+<h2>Entries</h2>
 <ul class="entries-list" />
   <% @entries.each do |entry| %>
     <li>
