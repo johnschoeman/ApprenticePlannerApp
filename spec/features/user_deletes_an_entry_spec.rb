@@ -10,7 +10,8 @@ RSpec.feature "User deletes a journal entry" do
     have_css(".flash-success", text: message)
   end
 
-  scenario "deletes an entry" do
+  scenario "deletes an entry", :include_stack_overflow_helpers do
+    stub_api_request
     todays_date = Date.today
     tomorrows_date = todays_date.next_day
     user = create(:user)

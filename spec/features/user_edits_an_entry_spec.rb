@@ -1,8 +1,8 @@
 require "rails_helper"
-require "support/features/clearance_helpers"
 
 RSpec.feature "User edits an entry" do
-  scenario "edits an entry" do
+  scenario "edits an entry", :include_stack_overflow_helpers do
+    stub_api_request
     initial_goal1 = build(:goal, description: Faker::Lorem.sentence)
     initial_goal2 = build(:goal, description: Faker::Lorem.sentence)
     initial_goal3 = build(:goal, description: Faker::Lorem.sentence)

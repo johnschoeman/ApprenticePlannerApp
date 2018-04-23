@@ -23,6 +23,7 @@ class EntriesController < ApplicationController
 
   def index
     @entries = Entry.all
+    @tidbit = TidbitGenerator.generate
   end
 
   def edit

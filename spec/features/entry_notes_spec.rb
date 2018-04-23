@@ -19,7 +19,9 @@ RSpec.feature "Entry Notes" do
     expect(page).to have_content(new_note_content)
   end
 
-  scenario "user writes new notes on todays entry" do
+  scenario "user writes new notes on todays entry",
+    :include_stack_overflow_helpers do
+    stub_api_request
     todays_date = Date.today
     user = create(:user)
     entry = Entry.create(date: todays_date, user: user)

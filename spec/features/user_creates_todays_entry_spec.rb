@@ -2,7 +2,8 @@ require "rails_helper"
 require "support/features/clearance_helpers"
 
 RSpec.feature "User creates a journal entry" do
-  scenario "creates today's entry" do
+  scenario "creates today's entry", :include_stack_overflow_helpers do
+    stub_api_request
     goal1 = Faker::Lorem.sentence
     goal2 = Faker::Lorem.sentence
     goal3 = Faker::Lorem.sentence
