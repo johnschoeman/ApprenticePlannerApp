@@ -11,6 +11,8 @@ end
 
 require "webmock/rspec"
 require "timecop"
+require "email_spec"
+require "email_spec/rspec"
 
 # http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|

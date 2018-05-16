@@ -31,6 +31,7 @@ gem "title"
 gem "uglifier"
 
 group :development do
+  gem "letter_opener"
   gem "listen"
   gem "rack-mini-profiler", require: false
   gem "spring"
@@ -54,6 +55,7 @@ end
 
 group :test do
   gem "capybara-webkit"
+  gem "email_spec"
   gem "formulaic"
   gem "launchy"
   gem "shoulda-matchers"

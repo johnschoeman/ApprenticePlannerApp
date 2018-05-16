@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h2>Hi <%= @user.email %></h2>
+    <div>
+      <h3>Notes from last week:</h3>
+      <ul>
+        <% @entries.each do |entry| %>
+          <% if entry.note %>
+          <li>
+            <div>
+              <div>date: <%= entry.date %></div>
+              <div>content: <%= entry.note.content %></div>
+            </div>
+          </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </body>
+</html>
