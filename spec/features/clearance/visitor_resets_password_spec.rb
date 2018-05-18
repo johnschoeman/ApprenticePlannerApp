@@ -46,8 +46,9 @@ RSpec.feature "Visitor resets password" do
 
   def expect_page_to_display_change_password_message
     message =
-      "You will receive an email within the next few minutes.
-       It contains instructions for changing your password."
+      "You will receive an email within the next few minutes. " \
+       "It contains instructions for changing your password."
+
     expect(page).to have_content message
   end
 

@@ -7,9 +7,10 @@ end
 
 ruby "2.5.0"
 
-gem "rails", "~> 5.1.4"
+gem "rails", "~> 5.2.0"
 
 gem "autoprefixer-rails"
+gem "bootsnap", require: false
 gem "clearance"
 gem "es6-promise-rails"
 gem "fetch-rails"
