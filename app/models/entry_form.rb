@@ -1,7 +1,7 @@
 class EntryForm
   include ActiveModel::Model
 
-  attr_reader :entry, :goals
+  attr_reader :entry, :goals, :note
 
   delegate :id, :persisted?, :date, to: :entry
 
@@ -10,7 +10,8 @@ class EntryForm
   def initialize(entry: nil)
     @new_record = true unless entry
     @entry = entry || Entry.new(date: Date.today)
-    @goals = if entry_exists_and_has_no_goals?(entry)
+    @note = @entry.note || @entry.build_note(content: "")
+    @goals = if entry && entry_has_goals?
                entry.goals
              else
                Array.new(3) { Goal.new }
@@ -32,8 +33,8 @@ class EntryForm
 
   private
 
-  def entry_exists_and_has_no_goals?(entry)
-    entry && !entry.goals.empty?
+  def entry_has_goals?
+    entry.goals.exists?
   end
 
   def set_attributes(date: nil, user: nil, goal_descriptions: [])
@@ -50,6 +51,7 @@ class EntryForm
       ActiveRecord::Base.transaction do
         entry.save!
         goals.each(&:save!)
+        note.save!
       end
     end
   end
@@ -63,6 +65,10 @@ class EntryForm
       if goal.invalid?
         promote_errors(goal.errors)
       end
+    end
+
+    if note.invalid?
+      promote_errors(note.errors)
     end
   end
 

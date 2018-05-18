@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "GET /entry/:id", type: :request do
   it "doesn't return blank goals" do
     goals_count = 2
-    entry = create(:entry_with_goals, goals_count: goals_count)
+    entry = create(:entry, :with_note, :with_goals, goals_count: goals_count)
     create(:goal, :blank, entry: entry)
 
     get entry_path(entry)

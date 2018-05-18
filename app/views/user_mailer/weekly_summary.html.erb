@@ -9,14 +9,12 @@
       <h3>Notes from last week:</h3>
       <ul>
         <% @entries.each do |entry| %>
-          <% if entry.note %>
           <li>
             <div>
               <div>date: <%= entry.date %></div>
               <div>content: <%= entry.note.content %></div>
             </div>
           </li>
-          <% end %>
         <% end %>
       </ul>
     </div>

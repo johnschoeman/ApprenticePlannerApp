@@ -3,7 +3,17 @@ FactoryBot.define do
     date { Time.now }
     user
 
-    factory :entry_with_goals do
+    trait :with_note do
+      transient do
+        note_content { Faker::Lorem.sentence }
+      end
+
+      after(:create) do |entry, evaluator|
+        create(:note, entry: entry, content: evaluator.note_content)
+      end
+    end
+
+    trait :with_goals do
       transient do
         goals_count 3
       end

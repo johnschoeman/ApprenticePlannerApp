@@ -4,9 +4,11 @@ require "support/features/clearance_helpers"
 RSpec.feature "Entry Notes" do
   scenario "user alters existing notes" do
     user = create(:user)
-    entry = create(:entry, user: user)
     original_note_content = Faker::Lorem.paragraph
-    create(:note, entry: entry, content: original_note_content)
+    entry = create(:entry,
+                   :with_note,
+                   user: user,
+                   note_content: original_note_content)
     new_note_content = Faker::Lorem.paragraph
 
     visit entry_path(entry, as: user)
@@ -24,7 +26,7 @@ RSpec.feature "Entry Notes" do
     stub_api_request
     todays_date = Date.today
     user = create(:user)
-    entry = Entry.create(date: todays_date, user: user)
+    entry = create(:entry, :with_note, date: todays_date, user: user)
     notes_text = Faker::Lorem.paragraph
 
     visit entry_path(entry, as: user)

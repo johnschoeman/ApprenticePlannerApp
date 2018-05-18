@@ -4,7 +4,5 @@ Here is your weekly summary
 Notes from last week:
 <% @entries.each do |entry| %>
   <%= entry.date %>
-  <% if entry.note %>
-    <%= entry.note.content %>
-  <% end %>
+  <%= entry.note.content %>
 <% end %>

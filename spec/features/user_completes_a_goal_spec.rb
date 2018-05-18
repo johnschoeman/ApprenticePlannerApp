@@ -4,7 +4,7 @@ require "support/features/clearance_helpers"
 RSpec.feature "User completes a goal" do
   scenario "User clicks an uncomplete goal", js: true do
     user = create(:user)
-    entry = create(:entry, user: user)
+    entry = create(:entry, :with_note, user: user)
     goal1_description = Faker::Lorem.sentence
     goal1 = create(:goal, :uncompleted, entry: entry,
                                         description: goal1_description)
@@ -26,7 +26,7 @@ RSpec.feature "User completes a goal" do
   end
 
   scenario "Goals that are completed show as checked" do
-    entry = create(:entry)
+    entry = create(:entry, :with_note)
     completed_goal = create(:goal, :completed, entry: entry)
     uncompleted_goal = create(:goal, :uncompleted, entry: entry)
     completed_checkbox_selector = "input#goal-#{completed_goal.id}"

@@ -23,12 +23,11 @@ RSpec.describe UserMailer, type: :mailer do
     it "should contain the users notes from last week" do
       user = create(:user)
       date = 1.day.ago
-      entry = create(:entry, user: user, date: date)
-      note = create(:note, entry: entry)
+      entry = create(:entry, :with_note, user: user, date: date)
       email = UserMailer.with(user: user).weekly_summary
 
       expect(email).to have_body_text(date.strftime("%Y-%m-%d"))
-      expect(email).to have_body_text(note.content)
+      expect(email).to have_body_text(entry.note.content)
     end
   end
 end

@@ -13,7 +13,7 @@ RSpec.feature "User edits an entry" do
 
     user = create(:user)
     entry_to_edit =
-      Entry.create(date: todays_date, goals: initial_goals, user: user)
+      create(:entry, :with_goals, :with_note, goals: initial_goals, user: user)
 
     visit entries_path(as: user)
     click_on "entry-id-#{entry_to_edit.id}"
